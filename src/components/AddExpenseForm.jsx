@@ -59,7 +59,7 @@ function AddExpenseForm() {
       <button className="back-button" onClick={() => navigate("/")}>
         Back
       </button>
-      <form onSubmit={handleAddExpense}>
+      <form>
         <div className="inputBox">
           <label htmlFor="expName">Expense Name:</label>
           <input
@@ -114,7 +114,7 @@ function AddExpenseForm() {
         </div>
         {error && <p className="error">{error}</p>}{" "}
         {/* Display error message */}
-        <button type="submit" className="loginButton submitButton">
+        <button className="loginButton submitButton" onClick={handleAddExpense}>
           Add Expense
         </button>
       </form>

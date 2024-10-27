@@ -54,7 +54,7 @@ const Login = () => {
 
   return (
     <div className="mainContainer">
-      <form onSubmit={handleSubmit}>
+      <form>
         <h2>Login Page</h2>
         <div className="inputBox">
           <label htmlFor="email">Email</label>
@@ -79,7 +79,7 @@ const Login = () => {
           {errors.password && <p className="input-error">{errors.password}</p>}
         </div>
         <button
-          type="submit"
+          onClick={handleSubmit}
           className={`loginButton submitButton ${
             isDisabled ? "button-disabled" : ""
           }`}

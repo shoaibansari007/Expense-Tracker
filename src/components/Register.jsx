@@ -79,7 +79,7 @@ const Register = () => {
 
   return (
     <div className="mainContainer">
-      <form onSubmit={handleRegister}>
+      <form>
         <h2>Registration</h2>
 
         <div className="inputBox">
@@ -135,7 +135,7 @@ const Register = () => {
         </div>
 
         <button
-          type="submit"
+          onClick={handleRegister}
           className={`registerButton submitButton ${
             isDisabled ? "button-disabled" : ""
           }`}

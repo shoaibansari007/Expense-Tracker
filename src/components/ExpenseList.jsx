@@ -29,7 +29,6 @@ function ExpenseList() {
 
     localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
     setDeleteModalOpen(false);
-    window.location.reload();
   };
 
   const handleUpdateExpense = (e) => {
@@ -40,8 +39,7 @@ function ExpenseList() {
 
     const updatedUserData = { ...curr, expData: updatedExpData };
     localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
-    setIsEditing(null); // Reset editing state
-    window.location.reload();
+    setIsEditing(null);
   };
 
   const handleInputChange = (e) => {
@@ -115,7 +113,7 @@ function ExpenseList() {
           Cancel
         </button>
         <h3>Update Expense</h3>
-        <form onSubmit={handleUpdateExpense}>
+        <form>
           <div className="inputBox">
             <label htmlFor="expName">Expense Name:</label>
             <input
@@ -160,7 +158,10 @@ function ExpenseList() {
               className="input"
             ></textarea>
           </div>
-          <button type="submit" className="loginButton submitButton">
+          <button
+            className="loginButton submitButton"
+            onClick={handleUpdateExpense}
+          >
             Update Expense
           </button>
         </form>
