@@ -32,6 +32,18 @@ function ExpenseList() {
     window.location.reload();
   };
 
+  const handleUpdateExpense = (e) => {
+    e.preventDefault();
+    const updatedExpData = curr.expData.map((el) =>
+      el.expId === editData.expId ? editData : el
+    );
+
+    const updatedUserData = { ...curr, expData: updatedExpData };
+    localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
+    setIsEditing(null); // Reset editing state
+    window.location.reload();
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditData((prevData) => ({ ...prevData, [name]: value }));
@@ -45,44 +57,49 @@ function ExpenseList() {
       <h3>Expense List</h3>
       <div className="expense-box-list">
         {curr?.expData?.length > 0 ? (
-          <ul>
-            {curr?.expData?.map((el) => (
-              <li key={el.expId}>
-                <h4>{el.expName}</h4>
-                <p>
-                  Amount: <span>{el.amount}₹</span>
-                </p>
-                <p>
-                  Date: <span>{el.expDate}</span>
-                </p>
-                <p>
-                  Description: <span>{el.description}</span>
-                </p>
-                <button
-                  onClick={() => handleEditClick(el)}
-                  className="back-button"
-                  style={{
-                    backgroundColor: "#1E90FF",
-                    margin: "5px 5px 0 0",
-                    marginTop: "10px",
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteClick(el.expId)}
-                  className="back-button"
-                  style={{
-                    backgroundColor: "#1E90FF",
-                    margin: "5px 5px 0 0",
-                    marginTop: "10px",
-                  }}
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+          <table className="expense-table">
+            <thead>
+              <tr>
+                <th>Expense Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {curr.expData.map((el) => (
+                <tr key={el.expId}>
+                  <td className="exp-name">{el.expName}</td>
+                  <td>{el.amount}₹</td>
+                  <td>{el.expDate}</td>
+                  <td>{el.description}</td>
+                  <td>
+                    <button
+                      onClick={() => handleEditClick(el)}
+                      className="back-button"
+                      style={{
+                        backgroundColor: "#1E90FF",
+                        margin: "5px 5px 0 0",
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClick(el.expId)}
+                      className="back-button"
+                      style={{
+                        backgroundColor: "#1E90FF",
+                        margin: "5px 5px 0 0",
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p className="textCenter">No expenses available.</p>
         )}
@@ -98,11 +115,7 @@ function ExpenseList() {
           Cancel
         </button>
         <h3>Update Expense</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form onSubmit={handleUpdateExpense}>
           <div className="inputBox">
             <label htmlFor="expName">Expense Name:</label>
             <input
@@ -153,7 +166,7 @@ function ExpenseList() {
         </form>
       </UpdateExpense>
 
-      {/* Delete  Expense*/}
+      {/* Delete Expense */}
       <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}

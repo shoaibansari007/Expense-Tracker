@@ -173,7 +173,6 @@ form {
 }
 .expense-box-list {
   margin: 20px 0;
-  /* padding: 20px; */
   ul {
     display: flex;
     gap: 20px;
@@ -188,6 +187,59 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.05);
   }
+}
+
+/* Expense Table */
+.exp-name {
+  font-weight: 600;
+  color: #045e07 !important;
+}
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.expense-table th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.expense-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.expense-table tr:hover {
+  background-color: #ddd;
+}
+
+.expense-table td {
+  color: #333;
+}
+
+.expense-table .back-button {
+  padding: 8px 12px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.expense-table .back-button:hover {
+  opacity: 0.9;
+}
+
+.expense-table .back-button[style*="background-color: #1E90FF"] {
+  background-color: #1e90ff;
 }
 
 /* Modal */
